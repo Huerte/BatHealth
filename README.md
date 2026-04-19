@@ -65,13 +65,7 @@ cd bathealth
 
 ---
 
-### Step 2: Install Dependencies
-
-_No external dependencies required._
-
----
-
-### Step 3: Build (If Applicable)
+### Step 2: Build (If Applicable)
 
 To build the executable from source:
 
@@ -81,7 +75,7 @@ build.bat
 
 ---
 
-### Step 4: Run
+### Step 3: Run
 
 **Pre-built Executable:**
 ```bash
