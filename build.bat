@@ -32,13 +32,36 @@ if errorlevel 1 (
 echo       Done.
 echo.
 
-echo [3/3] Cleaning up...
+echo [3/4] Cleaning up...
 rmdir /s /q build 2>nul
 echo       Done.
 echo.
 
+echo [4/4] Building Windows Installer Using Inno Setup...
+set ISCC="C:\Program Files (x86)\Inno Setup 6\ISCC.exe"
+if not exist %ISCC% set ISCC="C:\Program Files\Inno Setup 6\ISCC.exe"
+
+if not exist %ISCC% (
+    echo [INFO] Inno Setup Compiler not found. Installing via winget...
+    winget install --id JRSoftware.InnoSetup -e --accept-package-agreements --accept-source-agreements --silent >nul 2>&1
+    set ISCC="C:\Program Files (x86)\Inno Setup 6\ISCC.exe"
+)
+
+if exist %ISCC% (
+    %ISCC% "installer\installer.iss" >nul 2>&1
+    if errorlevel 1 (
+        echo [ERROR] Failed to compile installer.
+    ) else (
+        echo       Installer successfully created in Output\
+    )
+) else (
+    echo [WARNING] Could not locate or install ISCC.exe. Installer was not built.
+)
+echo.
+
 echo ============================================
 echo   Build complete!
-echo   Output: dist\BatHealth.exe
+echo   Executable : dist\BatHealth.exe
+echo   Installer  : Output\BatHealth_Setup_v1.0.exe
 echo ============================================
 pause
