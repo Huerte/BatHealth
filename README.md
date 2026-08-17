@@ -2,6 +2,10 @@
 
 # BatHealth
 
+<p align="center">
+  <img width="950" height="500" alt="image" src="https://github.com/user-attachments/assets/b9808855-d250-4635-9f19-ee5d99681ef0" />
+</p>
+
 [![Version](https://img.shields.io/badge/version-1.0-blue.svg)](#)
 [![Platform](https://img.shields.io/badge/platform-Windows-blueviolet.svg)](#)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](#)
