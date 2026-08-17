@@ -10,7 +10,6 @@ dist/
 *.pyd
 __pycache__/
 
-*.spec
 *.manifest
 *.exe
 *.dll
