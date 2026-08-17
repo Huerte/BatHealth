@@ -136,52 +136,6 @@ def enable_ansi():
 def set_console_title(title):
     kernel32.SetConsoleTitleW(title)
 
-def position_window_top_left(width_chars=55):
-    try:
-        user32 = ctypes.WinDLL("user32", use_last_error=True)
-        hwnd = user32.GetConsoleWindow()
-        if not hwnd:
-            return
-
-        # Shrink the screen buffer columns so the horizontal scrollbar doesn't appear.
-        handle = kernel32.GetStdHandle(STD_OUTPUT_HANDLE)
-
-        class COORD(ctypes.Structure):
-            _fields_ = [("X", ctypes.c_short), ("Y", ctypes.c_short)]
-
-        class SMALL_RECT(ctypes.Structure):
-            _fields_ = [
-                ("Left",   ctypes.c_short),
-                ("Top",    ctypes.c_short),
-                ("Right",  ctypes.c_short),
-                ("Bottom", ctypes.c_short),
-            ]
-
-        class CONSOLE_SCREEN_BUFFER_INFO(ctypes.Structure):
-            _fields_ = [
-                ("dwSize",               COORD),
-                ("dwCursorPosition",     COORD),
-                ("wAttributes",          ctypes.c_ushort),
-                ("srWindow",             SMALL_RECT),
-                ("dwMaximumWindowSize",  COORD),
-            ]
-
-        csbi = CONSOLE_SCREEN_BUFFER_INFO()
-        kernel32.GetConsoleScreenBufferInfo(handle, ctypes.byref(csbi))
-        height = csbi.dwSize.Y
-
-        win_rect = SMALL_RECT(0, 0, width_chars - 1, min(csbi.srWindow.Bottom - csbi.srWindow.Top, height - 1))
-        kernel32.SetConsoleWindowInfo(handle, True, ctypes.byref(win_rect))
-
-        new_size = COORD(width_chars, height)
-        kernel32.SetConsoleScreenBufferSize(handle, new_size)
-
-        SWP_NOSIZE    = 0x0001
-        SWP_NOZORDER  = 0x0004
-        SWP_SHOWWINDOW = 0x0040
-        user32.SetWindowPos(hwnd, None, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOZORDER | SWP_SHOWWINDOW)
-    except Exception:
-        pass
 
 RST   = "\033[0m"
 BOLD  = "\033[1m"
@@ -335,7 +289,7 @@ def display(data):
     bar = get_health_bar(pct)
 
     items = [
-        (f"{BOLD}{WHITE}BatHealth  v1.0.1{RST}", True),
+        (f"{BOLD}{WHITE}BatHealth  v1.0{RST}", True),
         (f"{DIM}Windows Battery Health Check{RST}", True),
         SEPARATOR,
         ("", False),
@@ -360,7 +314,7 @@ def display(data):
 
 def display_no_battery():
     items = [
-        (f"{BOLD}{WHITE}BatHealth  v1.0.1{RST}", True),
+        (f"{BOLD}{WHITE}BatHealth  v1.0{RST}", True),
         (f"{DIM}Windows Battery Health Check{RST}", True),
         SEPARATOR,
         ("", False),
@@ -375,7 +329,6 @@ def display_no_battery():
 def main():
     enable_ansi()
     set_console_title("BatHealth - Battery Health Check")
-    position_window_top_left(width_chars=55)
 
     try:
         os.system("")

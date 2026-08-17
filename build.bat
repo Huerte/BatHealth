@@ -62,6 +62,6 @@ echo.
 echo ============================================
 echo   Build complete!
 echo   Executable : dist\BatHealth.exe
-echo   Installer  : Output\BatHealth_Setup_v1.0.1.exe
+echo   Installer  : Output\BatHealth_Setup_v1.0.exe
 echo ============================================
 pause

@@ -6,7 +6,7 @@
   <img width="950" height="500" alt="BatHealth screenshot" src="https://github.com/user-attachments/assets/b9808855-d250-4635-9f19-ee5d99681ef0" />
 </p>
 
-[![Version](https://img.shields.io/badge/version-1.0.1-blue.svg)](#)
+[![Version](https://img.shields.io/badge/version-1.0-blue.svg)](#)
 [![Platform](https://img.shields.io/badge/platform-Windows-blueviolet.svg)](#)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](#)
 
@@ -45,7 +45,7 @@ There are two ways to get BatHealth. Pick whichever fits you.
 You do not need Python, Git, or any technical knowledge for this option.
 
 1. Go to the [**Releases**](https://github.com/Huerte/BatHealth/releases) page.
-2. Under the latest release, click **`BatHealth_Setup_v1.0.1.exe`** to download it.
+2. Under the latest release, click **`BatHealth_Setup_v1.0.exe`** to download it.
 3. Double-click the downloaded file to open the setup wizard.
 4. Click **Next → Install → Finish**.
 5. Find the **BatHealth** shortcut on your Desktop or in the Start Menu and open it.
@@ -81,7 +81,7 @@ Use this if you want to read the code, modify it, or compile the installer yours
 The script handles everything automatically:
 
 - Installs **PyInstaller** if you don't have it, then compiles `src/bathealth.py` into `dist/BatHealth.exe`.
-- Installs **Inno Setup** via `winget` if you don't have it, then compiles the installer to `Output/BatHealth_Setup_v1.0.1.exe`.
+- Installs **Inno Setup** via `winget` if you don't have it, then compiles the installer to `Output/BatHealth_Setup_v1.0.exe`.
 
 After the script finishes you can run the standalone `dist/BatHealth.exe` directly, or distribute the installer from the `Output/` folder.
 

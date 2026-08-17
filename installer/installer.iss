@@ -1,5 +1,5 @@
 #define MyAppName "BatHealth"
-#define MyAppVersion "1.0.1"
+#define MyAppVersion "1.0"
 #define MyAppPublisher ""
 #define MyAppURL ""
 #define MyAppExeName "BatHealth.exe"
