@@ -1,0 +1,48 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Windows Executables
+    runs-on: windows-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyinstaller
+
+      - name: Build standalone executable (BatHealth.exe)
+        run: |
+          pyinstaller bathealth.spec --distpath dist --workpath build --clean --noconfirm
+
+      - name: Install Inno Setup
+        run: choco install innosetup
+
+      - name: Build Windows Installer
+        run: |
+          iscc installer\installer.iss
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            dist/BatHealth.exe
+            Output/*.exe
+          generate_release_notes: true
